@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daedalus Automations</title>
+<meta name="description" content="Workflow automation inside Microsoft 365 for firms in Suriname and the Caribbean. Fixed prices.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a drafting sheet. Left-aligned columns on a faint grid, mono labels like a document register, one brass accent for actions. */
+:root{
+  --paper:#f3f5f4; --sheet:#ffffff; --ink:#10262d; --muted:#51666c; --line:#cfd8d8;
+  --brass:#a8660a; --brass-ink:#ffffff; --teal:#0f6b73; --tint:#e4eeee;
+  --good:#1d7a4a; --wait:#8a6400; --bad:#a63a2b;
+  --display:"Bricolage Grotesque","Trebuchet MS",sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0c1c21; --sheet:#132a31; --ink:#e9f0ef; --muted:#9fb3b6; --line:#2b454c;
+    --brass:#e0a03c; --brass-ink:#10262d; --teal:#5cc2c9; --tint:#193840;
+    --good:#5fcf94; --wait:#e6c15a; --bad:#f08a78; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0c1c21; --sheet:#132a31; --ink:#e9f0ef; --muted:#9fb3b6; --line:#2b454c;
+  --brass:#e0a03c; --brass-ink:#10262d; --teal:#5cc2c9; --tint:#193840;
+  --good:#5fcf94; --wait:#e6c15a; --bad:#f08a78; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:48px 48px;background-position:-1px -1px;background-attachment:fixed}
+body::before{content:"";position:fixed;inset:0;background:var(--paper);opacity:.9;z-index:-1}
+[data-lang="en"] .nl,[data-lang="nl"] .en{display:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+a{color:var(--teal)}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--display);line-height:1.1;text-wrap:balance;margin:0}
+h1{font-size:clamp(2.3rem,6vw,4rem);font-weight:700;letter-spacing:-.02em}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem);font-weight:700;letter-spacing:-.01em}
+h3{font-size:1.2rem;font-weight:700}
+p{margin:0}
+.label{font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+header.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:1.15rem;color:var(--ink);text-decoration:none}
+.brand svg{width:30px;height:30px;flex:none}
+nav{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+nav a{color:var(--ink);text-decoration:none;font-size:.95rem}
+nav a:hover{text-decoration:underline}
+.lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--sheet)}
+.lang button{font:500 .8rem var(--mono);padding:6px 12px;border:0;background:transparent;color:var(--muted);cursor:pointer}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.btn{display:inline-block;background:var(--brass);color:var(--brass-ink);font-weight:600;text-decoration:none;padding:13px 22px;border-radius:8px;border:2px solid var(--brass)}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+section{padding:72px 0}
+.hero{padding:64px 0 56px}
+.hero .grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+.hero p.lead{font-size:1.2rem;color:var(--muted);max-width:34em;margin:20px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.register{background:var(--sheet);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px -24px rgba(16,38,45,.45);overflow:hidden}
+.register .cap{display:flex;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.register .scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.88rem}
+th,td{text-align:left;padding:10px 16px;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.num{font-variant-numeric:tabular-nums;font-family:var(--mono)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-flex;align-items:center;gap:6px;font:500 .74rem var(--mono);padding:3px 9px;border-radius:999px;border:1px solid currentColor}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.ok{color:var(--good)}.wait{color:var(--wait)}.no{color:var(--bad)}
+.head{display:grid;gap:10px;margin-bottom:32px;max-width:40em}
+.head p{color:var(--muted)}
+.cols4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cols2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+.card{background:var(--sheet);border:1px solid var(--line);border-radius:12px;padding:22px;display:grid;gap:10px;align-content:start}
+.card p{color:var(--muted);font-size:.97rem}
+.steps{counter-reset:s;display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:12px;background:var(--sheet);overflow:hidden}
+.steps li{list-style:none;padding:22px;border-right:1px solid var(--line);display:grid;gap:8px;align-content:start}
+.steps li:last-child{border-right:0}
+.steps li::before{counter-increment:s;content:"0" counter(s);font:500 .85rem var(--mono);color:var(--brass)}
+.steps p{color:var(--muted);font-size:.95rem}
+ol.steps{margin:0;padding:0}
+.card p.price{font-family:var(--display);font-size:2rem;font-weight:700;font-variant-numeric:tabular-nums;color:var(--ink);line-height:1.1}
+.card p.label{font-size:.78rem}
+.price small{font:400 .85rem var(--body);color:var(--muted)}
+.pkg{position:relative}
+.pkg.main{border:2px solid var(--brass)}
+.pkg ul{margin:0;padding-left:18px;color:var(--muted);font-size:.93rem;display:grid;gap:4px}
+.note{margin-top:18px;color:var(--muted);font-size:.93rem;max-width:60em}
+video{width:100%;display:block;border-radius:8px;background:#0c1c21;aspect-ratio:16/9}
+.band{background:var(--tint);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+details{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
+details+details{margin-top:10px}
+summary{font-weight:600;cursor:pointer}
+details p{color:var(--muted);margin-top:8px;max-width:62ch}
+.offer{background:var(--ink);color:var(--paper);border-radius:16px;padding:36px;display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+.offer .label{color:var(--brass)}
+.offer p{opacity:.85}
+.contactbox{background:var(--paper);color:var(--ink);border-radius:12px;padding:20px;display:grid;gap:8px}
+.placeholder{font-family:var(--mono);font-size:.9rem;border:1px dashed var(--brass);border-radius:8px;padding:10px 12px;overflow-wrap:anywhere}
+footer{padding:28px 0 48px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+@media (max-width:900px){
+  .hero .grid,.offer{grid-template-columns:1fr}
+  .cols4{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .steps li:nth-child(2){border-right:0}
+  .steps li:nth-child(-n+2){border-bottom:1px solid var(--line)}
+}
+@media (max-width:560px){
+  section{padding:52px 0}
+  .cols4,.cols2,.steps{grid-template-columns:1fr}
+  .steps li{border-right:0;border-bottom:1px solid var(--line)}
+  .steps li:last-child{border-bottom:0}
+  nav a.hide{display:none}
+  .offer{padding:24px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <a class="brand" href="#start" aria-label="Daedalus Automations">
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square" aria-hidden="true"><path d="M4 28V4h24v24H10V10h12v12h-6v-6"/><path d="M16 16h14" stroke="var(--brass)"/></svg>
+      Daedalus Automations
+    </a>
+    <nav>
+      <a class="hide" href="#work"><span class="en">What we automate</span><span class="nl">Wat we automatiseren</span></a>
+      <a class="hide" href="#packages"><span class="en">Packages</span><span class="nl">Pakketten</span></a>
+      <a class="hide" href="#demos"><span class="en">Demos</span><span class="nl">Demo's</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="nl">Contact</span></a>
+      <span class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true">EN</button>
+        <button type="button" id="lang-nl" aria-pressed="false">NL</button>
+      </span>
+    </nav>
+  </div>
+</header>
+
+<main id="start">
+<section class="hero">
+  <div class="wrap grid">
+    <div>
+      <p class="label"><span class="en">Workflow automation · Suriname and the Caribbean</span><span class="nl">Workflow-automatisering · Suriname en het Caribisch gebied</span></p>
+      <h1 style="margin-top:14px"><span class="en">Stop retyping. Start approving.</span><span class="nl">Stop met overtypen. Begin met goedkeuren.</span></h1>
+      <p class="lead"><span class="en">We turn the paperwork your office moves by email into automatic workflows, inside the Microsoft 365 you already pay for. Fixed prices, built remotely, supported afterwards.</span><span class="nl">Wij maken van het papierwerk dat uw kantoor per e-mail rondstuurt automatische werkstromen, binnen de Microsoft 365 waarvoor u al betaalt. Vaste prijzen, op afstand gebouwd, met ondersteuning achteraf.</span></p>
+      <div class="cta">
+        <a class="btn" href="#contact"><span class="en">Book a free 30-minute call</span><span class="nl">Plan een gratis gesprek van 30 minuten</span></a>
+        <a class="btn ghost" href="#demos"><span class="en">Watch the demos</span><span class="nl">Bekijk de demo's</span></a>
+      </div>
+    </div>
+    <div class="register" aria-label="Sample invoice register">
+      <div class="cap">
+        <strong><span class="en">Invoice Register</span><span class="nl">Factuurregister</span></strong>
+        <span class="label"><span class="en">Sample data</span><span class="nl">Voorbeeldgegevens</span></span>
+      </div>
+      <div class="scroll">
+      <table>
+        <thead><tr><th><span class="en">Received</span><span class="nl">Ontvangen</span></th><th><span class="en">Supplier</span><span class="nl">Leverancier</span></th><th>USD</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="num">09:02</td><td>Northgate Supplies</td><td class="num">1,240.00</td><td><span class="pill ok"><span class="en">Approved</span><span class="nl">Goedgekeurd</span></span></td></tr>
+          <tr><td class="num">09:41</td><td>Harbour Freight Co.</td><td class="num">386.50</td><td><span class="pill ok"><span class="en">Approved</span><span class="nl">Goedgekeurd</span></span></td></tr>
+          <tr><td class="num">10:15</td><td>Delta Office Goods</td><td class="num">92.75</td><td><span class="pill wait"><span class="en">Pending</span><span class="nl">In behandeling</span></span></td></tr>
+          <tr><td class="num">11:30</td><td>Meridian Print</td><td class="num">540.00</td><td><span class="pill no"><span class="en">Rejected</span><span class="nl">Afgewezen</span></span></td></tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">What we automate</span><span class="nl">Wat we automatiseren</span></p>
+      <h2><span class="en">The four jobs that eat an office's week</span><span class="nl">De vier taken die de week van een kantoor opslokken</span></h2>
+    </div>
+    <div class="cols4">
+      <div class="card"><h3><span class="en">Supplier invoices</span><span class="nl">Leveranciersfacturen</span></h3><p><span class="en">An emailed PDF is filed, logged and sent to the right manager for approval.</span><span class="nl">Een gemailde pdf wordt opgeslagen, geregistreerd en ter goedkeuring naar de juiste manager gestuurd.</span></p></div>
+      <div class="card"><h3><span class="en">Requests and approvals</span><span class="nl">Aanvragen en goedkeuringen</span></h3><p><span class="en">Purchase, leave and expense requests start from a form and end in a register.</span><span class="nl">Inkoop-, verlof- en onkostenaanvragen beginnen met een formulier en eindigen in een register.</span></p></div>
+      <div class="card"><h3><span class="en">Contracts and signatures</span><span class="nl">Contracten en handtekeningen</span></h3><p><span class="en">A contract is sent for e-signature and the signed copy files itself.</span><span class="nl">Een contract wordt digitaal ter ondertekening verstuurd en het getekende exemplaar wordt automatisch opgeslagen.</span></p></div>
+      <div class="card"><h3><span class="en">Customer requests</span><span class="nl">Klantverzoeken</span></h3><p><span class="en">A shared mailbox becomes a tracker with an owner and a due date on every request.</span><span class="nl">Een gedeelde mailbox wordt een overzicht met een eigenaar en een einddatum bij elk verzoek.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">How it works</span><span class="nl">Zo werkt het</span></p>
+      <h2><span class="en">From first call to a running workflow in four steps</span><span class="nl">In vier stappen van eerste gesprek naar een werkende werkstroom</span></h2>
+    </div>
+    <ol class="steps">
+      <li><h3><span class="en">Free call</span><span class="nl">Gratis gesprek</span></h3><p><span class="en">In 30 minutes we find the one process that costs you the most time.</span><span class="nl">In 30 minuten vinden we het ene proces dat u de meeste tijd kost.</span></p></li>
+      <li><h3>Audit</h3><p><span class="en">We map it with the person who does the work and show what automation would save.</span><span class="nl">We brengen het in kaart met de medewerker die het werk doet en laten zien wat automatisering oplevert.</span></p></li>
+      <li><h3><span class="en">Build</span><span class="nl">Bouw</span></h3><p><span class="en">We build inside your own Microsoft 365 and test with your real documents.</span><span class="nl">We bouwen binnen uw eigen Microsoft 365 en testen met uw echte documenten.</span></p></li>
+      <li><h3><span class="en">Handover and support</span><span class="nl">Overdracht en ondersteuning</span></h3><p><span class="en">You get documentation, a recorded walkthrough and 30 days of free fixes.</span><span class="nl">U krijgt documentatie, een opgenomen uitleg en 30 dagen gratis herstel.</span></p></li>
+    </ol>
+  </div>
+</section>
+
+<section id="packages" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">Packages</span><span class="nl">Pakketten</span></p>
+      <h2><span class="en">Fixed prices in US dollars</span><span class="nl">Vaste prijzen in Amerikaanse dollars</span></h2>
+    </div>
+    <div class="cols4">
+      <div class="card pkg"><p class="label">Workflow Audit</p><p class="price">$150</p><ul><li><span class="en">One process mapped</span><span class="nl">Eén proces in kaart</span></li><li><span class="en">Three ranked automations</span><span class="nl">Drie automatiseringen op volgorde</span></li><li><span class="en">Credited against a build</span><span class="nl">Verrekend met een bouwopdracht</span></li><li><span class="en">1 week</span><span class="nl">1 week</span></li></ul></div>
+      <div class="card pkg main"><p class="label">Starter Automation</p><p class="price">$600</p><ul><li><span class="en">One workflow</span><span class="nl">Eén werkstroom</span></li><li><span class="en">One approval step</span><span class="nl">Eén goedkeuringsstap</span></li><li><span class="en">Designed to need no extra licences</span><span class="nl">Ontworpen zonder extra licenties</span></li><li><span class="en">2 weeks</span><span class="nl">2 weken</span></li></ul></div>
+      <div class="card pkg"><p class="label">Document Pipeline</p><p class="price">$1,500</p><ul><li><span class="en">Mailbox to SharePoint to approval</span><span class="nl">Van mailbox naar SharePoint naar goedkeuring</span></li><li><span class="en">E-signature and register</span><span class="nl">Digitale handtekening en register</span></li><li><span class="en">Audit trail</span><span class="nl">Controlespoor</span></li><li><span class="en">3 to 4 weeks</span><span class="nl">3 tot 4 weken</span></li></ul></div>
+      <div class="card pkg"><p class="label">Care Plan</p><p class="price">$150 <small><span class="en">per month</span><span class="nl">per maand</span></small></p><ul><li><span class="en">Monitoring of failures</span><span class="nl">Bewaking van storingen</span></li><li><span class="en">Fixes within 2 working days</span><span class="nl">Herstel binnen 2 werkdagen</span></li><li><span class="en">2 hours of changes a month</span><span class="nl">2 uur wijzigingen per maand</span></li><li><span class="en">Quarterly review</span><span class="nl">Evaluatie per kwartaal</span></li></ul></div>
+    </div>
+    <p class="note"><span class="en">Payment is 50% to start and 50% at handover. Microsoft and e-signature licences are bought by you, in your own name.</span><span class="nl">Betaling: 50% bij de start en 50% bij de overdracht. Licenties voor Microsoft en digitale handtekeningen koopt u zelf, op uw eigen naam.</span></p>
+  </div>
+</section>
+
+<section id="demos">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">Demos</span><span class="nl">Demo's</span></p>
+      <h2><span class="en">Two workflows, under a minute each</span><span class="nl">Twee werkstromen, elk in minder dan een minuut</span></h2>
+      <p><span class="en">Animated walkthroughs with sample data. The videos are in English.</span><span class="nl">Geanimeerde uitleg met voorbeeldgegevens. De video's zijn in het Engels.</span></p>
+    </div>
+    <div class="cols2">
+      <div class="card"><video controls preload="metadata" poster="media/invoice-intake.jpg" src="media/invoice-intake.mp4"></video><h3><span class="en">Supplier invoice intake</span><span class="nl">Ontvangst van leveranciersfacturen</span></h3><p><span class="en">From an email with a PDF to an approved row in the register.</span><span class="nl">Van een e-mail met pdf naar een goedgekeurde regel in het register.</span></p></div>
+      <div class="card"><video controls preload="metadata" poster="media/contract-signature.jpg" src="media/contract-signature.mp4"></video><h3><span class="en">Contract e-signature</span><span class="nl">Contract digitaal ondertekenen</span></h3><p><span class="en">From a PDF dropped in a folder to a signed copy, filed and logged.</span><span class="nl">Van een pdf in een map naar een getekend exemplaar, opgeslagen en geregistreerd.</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="band">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">Questions</span><span class="nl">Vragen</span></p>
+      <h2><span class="en">What owners ask first</span><span class="nl">Wat ondernemers als eerste vragen</span></h2>
+    </div>
+    <details open><summary><span class="en">Do we need to buy new software?</span><span class="nl">Moeten we nieuwe software kopen?</span></summary><p><span class="en">Usually not. The Starter package is designed around tools included in Microsoft 365 business plans. Some workflows need a paid add-on or an e-signature subscription, and we tell you which before you commit.</span><span class="nl">Meestal niet. Het Starter-pakket is ontworpen rond tools die bij de zakelijke Microsoft 365-abonnementen horen. Voor sommige werkstromen is een betaalde uitbreiding of een abonnement voor digitale handtekeningen nodig. Dat hoort u van ons voordat u beslist.</span></p></details>
+    <details><summary><span class="en">Where do our documents go?</span><span class="nl">Waar blijven onze documenten?</span></summary><p><span class="en">Nowhere new. Everything is built and stored inside your own Microsoft 365. We work with an account you create and can remove.</span><span class="nl">Nergens anders. Alles wordt gebouwd en opgeslagen binnen uw eigen Microsoft 365. Wij werken met een account dat u aanmaakt en weer kunt verwijderen.</span></p></details>
+    <details><summary><span class="en">What if a workflow stops working?</span><span class="nl">Wat als een werkstroom stopt?</span></summary><p><span class="en">Every workflow sends a failure alert to a person you name. Fixes are free for 30 days after handover, and the Care Plan covers them after that.</span><span class="nl">Elke werkstroom stuurt bij een storing een melding naar een persoon die u aanwijst. Herstel is 30 dagen na de overdracht gratis; daarna valt het onder het Care Plan.</span></p></details>
+    <details><summary><span class="en">Who owns what you build?</span><span class="nl">Van wie is wat u bouwt?</span></summary><p><span class="en">You do. The workflows run under your account and you receive the documentation and a recorded walkthrough.</span><span class="nl">Van u. De werkstromen draaien op uw account en u ontvangt de documentatie en een opgenomen uitleg.</span></p></details>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="offer">
+      <div style="display:grid;gap:12px">
+        <p class="label"><span class="en">Launch offer · first three clients</span><span class="nl">Introductieaanbod · eerste drie klanten</span></p>
+        <h2><span class="en">A free audit, and the Starter Automation for $300</span><span class="nl">Een gratis audit en de Starter Automation voor $300</span></h2>
+        <p><span class="en">In return we ask for a written reference. Start with a 30-minute call about one process.</span><span class="nl">In ruil vragen we een schriftelijke referentie. Begin met een gesprek van 30 minuten over één proces.</span></p>
+      </div>
+      <div class="contactbox">
+        <strong><span class="en">Book the call</span><span class="nl">Plan het gesprek</span></strong>
+        <div class="placeholder"><span class="en">[Add your email address or WhatsApp number here before sharing this page]</span><span class="nl">[Vul hier uw e-mailadres of WhatsApp-nummer in voordat u deze pagina deelt]</span></div>
+        <span style="font-size:.9rem;color:var(--muted)">Paramaribo, Suriname</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span class="en">Daedalus Automations · Workflow automation for Microsoft 365. Not affiliated with Microsoft.</span><span class="nl">Daedalus Automations · Workflow-automatisering voor Microsoft 365. Niet verbonden aan Microsoft.</span></div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement,en=document.getElementById('lang-en'),nl=document.getElementById('lang-nl');
+  function set(l){root.setAttribute('data-lang',l);root.setAttribute('lang',l);
+    en.setAttribute('aria-pressed',String(l==='en'));nl.setAttribute('aria-pressed',String(l==='nl'));
+    try{localStorage.setItem('daedalus-lang',l)}catch(e){}}
+  en.addEventListener('click',function(){set('en')});nl.addEventListener('click',function(){set('nl')});
+  try{var s=localStorage.getItem('daedalus-lang');if(s==='nl'||s==='en')set(s)}catch(e){}
+})();
+</script>
+</body>
+</html>

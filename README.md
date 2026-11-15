@@ -19,7 +19,7 @@ Static site for daedalusautomations.com, served by GitHub Pages from the `main` 
 
 - **Text:** every visible sentence appears twice, once in `<span class="en">` (English) and once in `<span class="nl">` (Dutch). Change both.
 - **Prices:** search for `class="price"` in `index.html`. The launch offer price is in the `#contact` section.
-- **Contact details:** search for `class="placeholder"` and replace the bracketed text in both languages.
+- **Contact details:** search for `class="mail"` and change the email address in both the link (`href="mailto:..."`) and the visible text.
 - **Videos:** replace the files in `media/` and keep the same file names, or update the `src` and `poster` paths in the `#demos` section.
 - **Colours and fonts:** the `:root` block at the top of the `<style>` section holds the colour and font tokens for light and dark themes.
 

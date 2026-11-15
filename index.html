@@ -97,6 +97,9 @@ ol.steps{margin:0;padding:0}
 .pkg.main{border:2px solid var(--brass)}
 .pkg ul{margin:0;padding-left:18px;color:var(--muted);font-size:.93rem;display:grid;gap:4px}
 .note{margin-top:18px;color:var(--muted);font-size:.93rem;max-width:60em}
+.demos{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.chips li{background:var(--sheet);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-size:.95rem}
 video{width:100%;display:block;border-radius:8px;background:#0c1c21;aspect-ratio:16/9}
 .band{background:var(--tint);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 details{background:var(--sheet);border:1px solid var(--line);border-radius:10px;padding:14px 18px}
@@ -183,13 +186,22 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:.9rem;border-top:1px sol
   <div class="wrap">
     <div class="head">
       <p class="label"><span class="en">What we automate</span><span class="nl">Wat we automatiseren</span></p>
-      <h2><span class="en">The four jobs that eat an office's week</span><span class="nl">De vier taken die de week van een kantoor opslokken</span></h2>
+      <h2><span class="en">Paperwork we take off your desk</span><span class="nl">Papierwerk dat wij van uw bureau halen</span></h2>
+      <p><span class="en">Twelve common examples, by department. Each one starts from email, a form or a folder you already use.</span><span class="nl">Twaalf veelvoorkomende voorbeelden, per afdeling. Elk begint bij e-mail, een formulier of een map die u al gebruikt.</span></p>
     </div>
     <div class="cols4">
-      <div class="card"><h3><span class="en">Supplier invoices</span><span class="nl">Leveranciersfacturen</span></h3><p><span class="en">An emailed PDF is filed, logged and sent to the right manager for approval.</span><span class="nl">Een gemailde pdf wordt opgeslagen, geregistreerd en ter goedkeuring naar de juiste manager gestuurd.</span></p></div>
-      <div class="card"><h3><span class="en">Requests and approvals</span><span class="nl">Aanvragen en goedkeuringen</span></h3><p><span class="en">Purchase, leave and expense requests start from a form and end in a register.</span><span class="nl">Inkoop-, verlof- en onkostenaanvragen beginnen met een formulier en eindigen in een register.</span></p></div>
-      <div class="card"><h3><span class="en">Contracts and signatures</span><span class="nl">Contracten en handtekeningen</span></h3><p><span class="en">A contract is sent for e-signature and the signed copy files itself.</span><span class="nl">Een contract wordt digitaal ter ondertekening verstuurd en het getekende exemplaar wordt automatisch opgeslagen.</span></p></div>
-      <div class="card"><h3><span class="en">Customer requests</span><span class="nl">Klantverzoeken</span></h3><p><span class="en">A shared mailbox becomes a tracker with an owner and a due date on every request.</span><span class="nl">Een gedeelde mailbox wordt een overzicht met een eigenaar en een einddatum bij elk verzoek.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Finance</span><span class="nl">Financiën</span></p><h3><span class="en">Supplier invoices</span><span class="nl">Leveranciersfacturen</span></h3><p><span class="en">An emailed PDF is filed, logged and sent to the right manager for approval.</span><span class="nl">Een gemailde pdf wordt opgeslagen, geregistreerd en ter goedkeuring naar de juiste manager gestuurd.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Finance</span><span class="nl">Financiën</span></p><h3><span class="en">Expense claims</span><span class="nl">Onkostendeclaraties</span></h3><p><span class="en">Staff submit a claim with a photo of the receipt, and it is approved and logged for payment.</span><span class="nl">Medewerkers dienen een declaratie in met een foto van de bon; die wordt goedgekeurd en geregistreerd voor betaling.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Operations</span><span class="nl">Operatie</span></p><h3><span class="en">Purchase requests</span><span class="nl">Inkoopaanvragen</span></h3><p><span class="en">A short form reaches the right manager, and purchasing is told the moment it is approved.</span><span class="nl">Een kort formulier komt bij de juiste manager terecht en inkoop hoort het zodra het is goedgekeurd.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Operations</span><span class="nl">Operatie</span></p><h3><span class="en">Delivery paperwork</span><span class="nl">Leveringsdocumenten</span></h3><p><span class="en">Delivery notes and proof of delivery are filed against the right order, ready for an audit.</span><span class="nl">Pakbonnen en afleverbewijzen worden bij de juiste order opgeslagen, klaar voor een controle.</span></p></div>
+      <div class="card"><p class="label"><span class="en">HR</span><span class="nl">HR</span></p><h3><span class="en">Leave requests</span><span class="nl">Verlofaanvragen</span></h3><p><span class="en">Requests go to the manager, the answer goes back to the employee, and the leave register stays current.</span><span class="nl">Aanvragen gaan naar de manager, het antwoord gaat terug naar de medewerker en het verlofregister blijft actueel.</span></p></div>
+      <div class="card"><p class="label"><span class="en">HR</span><span class="nl">HR</span></p><h3><span class="en">New staff onboarding</span><span class="nl">Onboarding van nieuwe medewerkers</span></h3><p><span class="en">One form starts the checklist: account, equipment, documents to sign, and a reminder for each owner.</span><span class="nl">Eén formulier start de checklist: account, apparatuur, te tekenen documenten en een herinnering voor elke verantwoordelijke.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Sales and customers</span><span class="nl">Verkoop en klanten</span></p><h3><span class="en">Quotations and contracts</span><span class="nl">Offertes en contracten</span></h3><p><span class="en">A document is sent for e-signature and the signed copy files itself.</span><span class="nl">Een document wordt digitaal ter ondertekening verstuurd en het getekende exemplaar wordt automatisch opgeslagen.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Sales and customers</span><span class="nl">Verkoop en klanten</span></p><h3><span class="en">Customer requests</span><span class="nl">Klantverzoeken</span></h3><p><span class="en">A shared mailbox becomes a tracker with an owner and a due date on every request.</span><span class="nl">Een gedeelde mailbox wordt een overzicht met een eigenaar en een einddatum bij elk verzoek.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Office and IT</span><span class="nl">Kantoor en IT</span></p><h3><span class="en">Equipment tracking</span><span class="nl">Beheer van apparatuur</span></h3><p><span class="en">Laptops, phones and tools are logged when issued and returned, with a record of who has what.</span><span class="nl">Laptops, telefoons en gereedschap worden geregistreerd bij uitgifte en inname, met een overzicht van wie wat heeft.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Office and IT</span><span class="nl">Kantoor en IT</span></p><h3><span class="en">Expiry reminders</span><span class="nl">Herinneringen voor vervaldata</span></h3><p><span class="en">Contracts, licences and permits send a reminder well before they run out.</span><span class="nl">Contracten, licenties en vergunningen sturen ruim voor de vervaldatum een herinnering.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Office and IT</span><span class="nl">Kantoor en IT</span></p><h3><span class="en">Weekly reports</span><span class="nl">Wekelijkse rapporten</span></h3><p><span class="en">Open approvals, overdue requests and totals arrive in your inbox every Monday.</span><span class="nl">Openstaande goedkeuringen, achterstallige verzoeken en totalen staan elke maandag in uw inbox.</span></p></div>
+      <div class="card"><p class="label"><span class="en">Office and IT</span><span class="nl">Kantoor en IT</span></p><h3><span class="en">Forms that replace paper</span><span class="nl">Formulieren in plaats van papier</span></h3><p><span class="en">Inspection, visitor and incident forms are filled in on a phone and stored where you can find them.</span><span class="nl">Inspectie-, bezoekers- en incidentformulieren worden op een telefoon ingevuld en vindbaar opgeslagen.</span></p></div>
     </div>
   </div>
 </section>
@@ -225,15 +237,40 @@ footer{padding:28px 0 48px;color:var(--muted);font-size:.9rem;border-top:1px sol
   </div>
 </section>
 
+<section id="more">
+  <div class="wrap">
+    <div class="head">
+      <p class="label"><span class="en">More is possible</span><span class="nl">Er kan meer</span></p>
+      <h2><span class="en">If it follows rules, it can probably be automated</span><span class="nl">Als het regels volgt, kan het waarschijnlijk worden geautomatiseerd</span></h2>
+      <p><span class="en">The examples above are starting points, not a full list. Most office processes are built from the same parts: something arrives, someone decides, a record is kept, and someone is told. If yours works like that, we can look at it.</span><span class="nl">De voorbeelden hierboven zijn startpunten, geen volledige lijst. De meeste kantoorprocessen bestaan uit dezelfde onderdelen: er komt iets binnen, iemand beslist, er wordt iets vastgelegd en iemand krijgt bericht. Werkt uw proces zo, dan kijken wij ernaar.</span></p>
+    </div>
+    <ul class="chips">
+      <li><span class="en">Reminders and follow-ups</span><span class="nl">Herinneringen en opvolging</span></li>
+      <li><span class="en">Two-level approvals</span><span class="nl">Goedkeuring in twee stappen</span></li>
+      <li><span class="en">Documents from templates</span><span class="nl">Documenten uit sjablonen</span></li>
+      <li><span class="en">Teams notifications</span><span class="nl">Teams-meldingen</span></li>
+      <li><span class="en">Excel and SharePoint kept in sync</span><span class="nl">Excel en SharePoint gesynchroniseerd</span></li>
+      <li><span class="en">Shared mailbox sorting</span><span class="nl">Gedeelde mailbox sorteren</span></li>
+      <li><span class="en">Scheduled reports</span><span class="nl">Geplande rapporten</span></li>
+      <li><span class="en">Reading data from PDFs</span><span class="nl">Gegevens uit pdf's lezen</span></li>
+      <li><span class="en">Links to your accounting system</span><span class="nl">Koppeling met uw boekhoudsysteem</span></li>
+      <li><span class="en">Audit trails</span><span class="nl">Controlesporen</span></li>
+    </ul>
+    <p class="note"><span class="en">Some of these need a paid Microsoft add-on or a connection to another system. We tell you which, and what it costs, before you commit.</span><span class="nl">Voor sommige hiervan is een betaalde Microsoft-uitbreiding of een koppeling met een ander systeem nodig. U hoort van ons welke, en wat het kost, voordat u beslist.</span></p>
+    <div class="cta" style="margin-top:22px"><a class="btn" href="#contact"><span class="en">Tell us about your process</span><span class="nl">Vertel ons over uw proces</span></a></div>
+  </div>
+</section>
+
 <section id="demos">
   <div class="wrap">
     <div class="head">
       <p class="label"><span class="en">Demos</span><span class="nl">Demo's</span></p>
-      <h2><span class="en">Two workflows, under a minute each</span><span class="nl">Twee werkstromen, elk in minder dan een minuut</span></h2>
+      <h2><span class="en">Three workflows, under a minute each</span><span class="nl">Drie werkstromen, elk in minder dan een minuut</span></h2>
       <p><span class="en">Animated walkthroughs with sample data. The videos are in English.</span><span class="nl">Geanimeerde uitleg met voorbeeldgegevens. De video's zijn in het Engels.</span></p>
     </div>
-    <div class="cols2">
+    <div class="demos">
       <div class="card"><video controls preload="metadata" poster="media/invoice-intake.jpg" src="media/invoice-intake.mp4"></video><h3><span class="en">Supplier invoice intake</span><span class="nl">Ontvangst van leveranciersfacturen</span></h3><p><span class="en">From an email with a PDF to an approved row in the register.</span><span class="nl">Van een e-mail met pdf naar een goedgekeurde regel in het register.</span></p></div>
+      <div class="card"><video controls preload="metadata" poster="media/purchase-request.jpg" src="media/purchase-request.mp4"></video><h3><span class="en">Purchase request approval</span><span class="nl">Goedkeuring van inkoopaanvragen</span></h3><p><span class="en">From a short form to a recorded decision, with the requester kept informed.</span><span class="nl">Van een kort formulier naar een vastgelegde beslissing, waarbij de aanvrager op de hoogte blijft.</span></p></div>
       <div class="card"><video controls preload="metadata" poster="media/contract-signature.jpg" src="media/contract-signature.mp4"></video><h3><span class="en">Contract e-signature</span><span class="nl">Contract digitaal ondertekenen</span></h3><p><span class="en">From a PDF dropped in a folder to a signed copy, filed and logged.</span><span class="nl">Van een pdf in een map naar een getekend exemplaar, opgeslagen en geregistreerd.</span></p></div>
     </div>
   </div>

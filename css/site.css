@@ -182,3 +182,7 @@ ul.checks li::before{content:"";position:absolute;left:2px;top:.45em;width:14px;
 .ctaband p{color:var(--on-night-muted)}
 .ctaband .mail{color:#5fd7e0}
 @media (max-width:960px){.ucgrid{grid-template-columns:1fr}.side{position:static}.related{grid-template-columns:1fr}}
+
+/* Language links on use-case pages */
+.lang a{font:700 .78rem var(--font);padding:7px 12px;color:var(--muted);text-decoration:none;display:block}
+.lang a[aria-current="page"]{background:var(--tint);color:var(--brand-dark)}

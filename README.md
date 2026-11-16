@@ -6,7 +6,8 @@ Static site for daedalusautomations.com, served by GitHub Pages from the `main` 
 
 - `index.html`: the homepage (text and the language switch).
 - `css/site.css`: the styles for every page.
-- `automations/<name>/index.html`: one page per use case, in English. Each is a complete page you can edit on its own.
+- `automations/<name>/index.html`: one page per use case, in English.
+- `nl/automations/<name>/index.html`: the Dutch version of each use-case page. Each English and Dutch page links to the other with the EN/NL switch in its header.
 - `media/`: the two demo videos and their preview images.
 
 ## Updating the site in VS Code
@@ -27,8 +28,8 @@ Static site for daedalusautomations.com, served by GitHub Pages from the `main` 
 
 ## Adding or changing a use-case page
 
-- To change a page, edit its `automations/<name>/index.html`.
-- To add one, copy an existing folder, rename it, edit the text, add a card linking to it in the `#work` section of `index.html`, and add its address to `sitemap.xml`.
+- To change a page, edit its `automations/<name>/index.html` and the Dutch copy in `nl/automations/<name>/index.html`.
+- To add one, copy an existing folder, rename it, edit the text, do the same under `nl/`, add a card with both links in the `#work` section of `index.html`, and add both addresses to `sitemap.xml`. In the `<head>` of both pages, update the two `hreflang` links so each page points to its translation.
 
 ## Domain
 

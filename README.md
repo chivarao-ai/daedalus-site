@@ -4,7 +4,9 @@ Static site for daedalusautomations.com, served by GitHub Pages from the `main` 
 
 ## Files
 
-- `index.html`: the whole site (text, styles and the language switch).
+- `index.html`: the homepage (text and the language switch).
+- `css/site.css`: the styles for every page.
+- `automations/<name>/index.html`: one page per use case, in English. Each is a complete page you can edit on its own.
 - `media/`: the two demo videos and their preview images.
 
 ## Updating the site in VS Code
@@ -22,6 +24,11 @@ Static site for daedalusautomations.com, served by GitHub Pages from the `main` 
 - **Contact details:** search for `class="mail"` and change the email address in both the link (`href="mailto:..."`) and the visible text.
 - **Videos:** replace the files in `media/` and keep the same file names, or update the `src` and `poster` paths in the `#demos` section.
 - **Colours and fonts:** the `:root` block at the top of the `<style>` section holds the colour and font tokens for light and dark themes.
+
+## Adding or changing a use-case page
+
+- To change a page, edit its `automations/<name>/index.html`.
+- To add one, copy an existing folder, rename it, edit the text, add a card linking to it in the `#work` section of `index.html`, and add its address to `sitemap.xml`.
 
 ## Domain
 
